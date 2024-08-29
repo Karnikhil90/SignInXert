@@ -17,16 +17,20 @@ This is Going to use OOPs. for Multiple Pages/Framers like Login, creations , pr
 File Structure:
 ./ {Root}
     ├── src
-        ├──main.py (The main application which is going to run)
+        ├── main.py (The main application which is going to run)
+        ├── UserDataBank.py
         
         ├── lib/* {import self create module}
         ├── icon/*{all the icons are stored here}
         ├── cache/* {To store the data of the user who is logged in}
+        ├── logs/
+        ├── info/
+        ├── database/* 
         ├── config/*{This will contain a json file with some variables from which u can modify APP.(like background color geometry)}
     
         ├──.........{more dir.. will be there as its grow.}
 
-TODO: There will classes UserDataBank, SignInXert and rest are part of the SignInXert.
+! There will classes UserDataBank, SignInXert and rest are part of the SignInXert.
     *The UserDataBank: use The lib.FileAccess to read and write the data to store the use data continuously.
         *And also to Use as to get the data from the json file.
     *SignInXert: This is the main application will be most likely to as a route and controll all the pages.
@@ -39,100 +43,71 @@ TODO: There will classes UserDataBank, SignInXert and rest are part of the SignI
 
 @update
     UPDATE [28-06-2024 - 15:40]: First update write the documentation as big comment and create the base application. 
+    UPDATE [29-06-2024 - 10:30]: Adjusting the file paths & structures.Added lil documentation in the big comments.
+        -> Implemented json config Directly from the file using FileAccess module.Set a default value to all the important files
 """
-
-# imports 
-
+# import
 import tkinter as tk
+from UserDataBank import UserDataBank
 from tkinter import messagebox
 from lib.FileAccess import FileAccess
 
 
+class SignInXert(tk.Tk):
+    def __init__(self, config_filepath: str = "./config/config_app.json"):
+        super().__init__()
 
-class UserDataBank:
-    def __init__(self, filepath="database/data.json"):
-        self.File = FileAccess(filepath)
-        try:
-            self.userData = self.File.readData()
-            if self.userData == [-1]:
-                self.File.CreateFile()
-                print("NEW FILE HAD BEEN CREATED")
-        except Exception as e:
-            print(f"Error reading data: {e}")
-        self.readingData()
-
-    def readingData(self):
-        self.user_uid_stored, self.user_age_stored, self.user_Fullname_stored, self.user_pass_stored, self.user_email_stored = [], [], [], [], []
-        try:
-            for data in self.userData:
-                self.user_uid_stored.append(data['uid'])
-                self.user_pass_stored.append(data['password'])
-                self.user_Fullname_stored.append(data['name'])
-                self.user_age_stored.append(data.get('age', ''))
-                self.user_email_stored.append(data.get('email', ''))
-        except Exception as e:
-            print(f"Error reading data: {e}")
-
-        
-    
-    def getData(self, DataType=None) -> list:
-        if DataType == "uid":
-            return self.user_uid_stored
-        elif DataType == "pass":
-            return self.user_pass_stored
-        elif DataType in ["fullname", "name"]:
-            return self.user_Fullname_stored
-        elif DataType == "age":
-            return self.user_age_stored
-        elif DataType == "email":
-            return self.user_email_stored
-        elif DataType == "login":
-            return self.user_uid_stored, self.user_pass_stored
-        else:
-            return self.user_uid_stored, self.user_pass_stored, self.user_Fullname_stored, self.user_age_stored, self.user_email_stored
-
-    def add_user(self, add_user_name: str,
-                 add_user_pass: str,
-                 add_userFullName: str,
-                 add_user_age: str = None,
-                 add_user_email_ID: str = None
-                 ) -> None:
-        newEntry = {
-            "uid": add_user_name,
-            "password": add_user_pass,
-            "name": add_userFullName,
-            "email": add_user_email_ID,
-            "age": add_user_age
+        # Default values
+        default_settings = {
+            "title": "SignInXert Dev",
+            "geometry": "360x620",
+            "font_family": "Arial",
+            "background_color": "#FFFFFF"
+        }
+        default_filepaths = {
+            "users_data": "database/data.json",
+            "logs": "logs/log.txt",
+            "stater": "SignInXert_Info.txt"
         }
 
-        print("Added entry")
-        self.File.addData(newEntry)
-        self.userData = []
-        self.userData = self.File.readData()
-        self.readingData()
+        # Attempt to load configuration
+        try:
+            file_obj = FileAccess(config_filepath)
+            config_data = file_obj.readData()
 
-    def search_user_data(self, uid: str):
-        """Search for a user by UID and return the full JSON data"""
-        for data in self.userData:
-            if data['uid'] == uid:
-                return data
-        return None
+            # Extract settings and file paths from config_data
+            settings = config_data[0].get('setting', default_settings)
+            filepaths = config_data[1].get('filepath', default_filepaths)
 
+            # Update defaults with settings from file
+            TITLE = settings.get('title', default_settings["title"])
+            GEOMETRY = settings.get('geometry', default_settings["geometry"])
+            FontFamily = settings.get('font_family', default_settings["font_family"])
+            background_color = settings.get('background_color', default_settings["background_color"])
 
+            # Extract file paths
+            users_data_path = filepaths.get('users_data', default_filepaths["users_data"])
 
-class SignInXert(tk.Tk):
-    def __init__(self):
-        super().__init__()
-        TITLE = "SignInXert v0.2.1 DEV"
-        self.title("SignInXert Dev (v2.1.0)")
-        self.geometry("360x620")
-        
-        # Create an instance of UserDataBank to manage user data
-        self.databank = UserDataBank()
+        except (KeyError, IndexError, TypeError) as e:
+            print(f"Configuration error: {e}")
+            # Use default values if there is an issue with the config file
+            TITLE = default_settings["title"]
+            GEOMETRY = default_settings["geometry"]
+            FontFamily = default_settings["font_family"]
+            background_color = default_settings["background_color"]
+            users_data_path = default_filepaths["users_data"]
+
+        # Set application properties
+        self.title(TITLE)
+        self.geometry(GEOMETRY)
+        self.configure(bg=background_color)
+
+        # Create an instance of UserDataBank to manage user data with the path from config
+        self.databank = UserDataBank(users_data_path)
 
         # Dictionary to store frames for easy navigation
         self.frames = {}
-        
+
         # Add all the frames (pages) to the dictionary
         for F in (LoginPage, CreateUserPage, SettingPage, HomePage):
             page_name = F.__name__
@@ -149,35 +124,49 @@ class SignInXert(tk.Tk):
         frame.tkraise()
 
 class LoginPage(tk.Frame):
-    def __init__(self, parent, controller):
+    def __init__(self, parent, controller, color_scheme=None):
         super().__init__(parent)
         self.controller = controller
         self.Databank_instance = self.controller.databank
+
+        # Default color scheme
+        self.color_scheme = color_scheme or {
+            "bg": "#f0f0f0",
+            "button_bg": "#4CAF50",
+            "button_fg": "white",
+            "entry_bg": "#e0e0e0",
+            "entry_fg": "#333333",
+            "label_fg": "#000000",
+        }
+        self.configure(bg=self.color_scheme["bg"])
 
         # Configure grid layout
         self.grid_rowconfigure(0, weight=1)
         self.grid_rowconfigure(1, weight=1)
         self.grid_rowconfigure(2, weight=1)
         self.grid_rowconfigure(3, weight=1)
+        self.grid_rowconfigure(4, weight=1)
+        self.grid_rowconfigure(5, weight=1)
         self.grid_columnconfigure(0, weight=1)
-        
-        # Create and style widgets
-        self.label = tk.Label(self, text="Login", font=("Arial", 20, "bold"), bg="#f0f0f0")
-        self.label.grid(row=0, column=0, pady=20, sticky="n")
+        self.grid_columnconfigure(1, weight=1)
 
-        self.uid_label = tk.Label(self, text="User ID", font=("Arial", 12), bg="#f0f0f0")
+        # Create and style widgets
+        self.label = tk.Label(self, text="Login", font=("Arial", 20, "bold"), bg=self.color_scheme["bg"], fg=self.color_scheme["label_fg"])
+        self.label.grid(row=0, column=0, columnspan=2, pady=20, sticky="n")
+
+        self.uid_label = tk.Label(self, text="User ID", font=("Arial", 12), bg=self.color_scheme["bg"], fg=self.color_scheme["label_fg"])
         self.uid_label.grid(row=1, column=0, sticky="e", padx=10)
 
-        self.uid_entry = tk.Entry(self, font=("Arial", 12), bg="#e0e0e0", fg="#333333", bd=2, relief="groove")
+        self.uid_entry = tk.Entry(self, font=("Arial", 12), bg=self.color_scheme["entry_bg"], fg=self.color_scheme["entry_fg"], bd=2, relief="groove")
         self.uid_entry.grid(row=1, column=1, pady=10, padx=10, sticky="ew")
 
-        self.pass_label = tk.Label(self, text="Password", font=("Arial", 12), bg="#f0f0f0")
+        self.pass_label = tk.Label(self, text="Password", font=("Arial", 12), bg=self.color_scheme["bg"], fg=self.color_scheme["label_fg"])
         self.pass_label.grid(row=2, column=0, sticky="e", padx=10)
 
-        self.pass_entry = tk.Entry(self, show="*", font=("Arial", 12), bg="#e0e0e0", fg="#333333", bd=2, relief="groove")
+        self.pass_entry = tk.Entry(self, show="*", font=("Arial", 12), bg=self.color_scheme["entry_bg"], fg=self.color_scheme["entry_fg"], bd=2, relief="groove")
         self.pass_entry.grid(row=2, column=1, pady=10, padx=10, sticky="ew")
 
-        self.login_button = tk.Button(self, text="Login", font=("Arial", 12, "bold"), command=self.check_login, bg="#4CAF50", fg="white", relief="raised")
+        self.login_button = tk.Button(self, text="Login", font=("Arial", 12, "bold"), command=self.check_login, bg=self.color_scheme["button_bg"], fg=self.color_scheme["button_fg"], relief="raised")
         self.login_button.grid(row=3, column=0, columnspan=2, pady=20, padx=10, sticky="ew")
 
         self.create_button = tk.Button(self, text="Create Account", font=("Arial", 12), command=lambda: controller.show_frame("CreateUserPage"), bg="#2196F3", fg="white", relief="raised")
@@ -186,16 +175,22 @@ class LoginPage(tk.Frame):
         self.back_button = tk.Button(self, text="Settings", font=("Arial", 12), command=lambda: controller.show_frame("SettingPage"), bg="#FFC107", fg="black", relief="raised")
         self.back_button.grid(row=5, column=0, columnspan=2, pady=10, padx=10, sticky="ew")
 
+        self.bind("<Configure>", self.on_resize)
+
+    def on_resize(self, event):
+        """Handle window resize to keep the layout responsive."""
+        for widget in self.winfo_children():
+            widget.grid_configure(padx=max(event.width // 50, 10), pady=max(event.height // 50, 10))
+            widget.update_idletasks()
+
     def check_login(self):
-        """Check if the user credentials are valid"""
+        """Check if the user credentials are valid using the UserDataBank login method."""
         uid = self.uid_entry.get()
         password = self.pass_entry.get()
-        user_ids, passwords = self.Databank_instance.getData('login') # @return uid & password
-        search_user_data = self.Databank_instance.search_user_data(uid)
-        retrieve_user_name = search_user_data['name']
 
-        if uid in user_ids and password == passwords[user_ids.index(uid)]:
-            messagebox.showinfo("Login Successful", f"Welcome {retrieve_user_name}!")
+        if self.Databank_instance.logging(uid, password):
+            name = self.Databank_instance.search_user_data(uid).get('name','null')
+            messagebox.showinfo("Login Successful", f"Welcome {name}!")  # Using UID as the greeting name
             self.controller.show_frame("HomePage")  # Navigate to home page after successful login
         else:
             messagebox.showerror("Login Failed", "Invalid UID or Password")
@@ -276,7 +271,7 @@ class CreateUserPage(tk.Frame):
             return
 
         # Add the user to the databank
-        self.controller.databank.add_user(uid, password, fullname, age)
+        self.controller.databank.add_user(uid, password, fullname, age,email)
 
         # Notify the user and redirect to the login page
         messagebox.showinfo("Success", "Account created successfully!")
@@ -308,7 +303,6 @@ class SettingPage(tk.Frame):
         self.back_button = tk.Button(self, text="Back to Login", command=lambda: controller.show_frame("LoginPage"))
         self.back_button.pack()
 
-
 class HomePage(tk.Frame):
     def __init__(self, parent, controller):
         super().__init__(parent)
@@ -325,7 +319,6 @@ class HomePage(tk.Frame):
         # Button to log out and go back to the login page
         logout_button = tk.Button(self, text="Logout", command=lambda: controller.show_frame("LoginPage"))
         logout_button.pack()
-
 
 if __name__ == "__main__":
     app = SignInXert()

@@ -4,6 +4,7 @@ import json
 class FileAccess:
     def __init__(self, fileAddress):
         self.file_address = fileAddress
+        print(fileAddress)
         try:
             self.ensure_directory_exists()
             self.ensure_file_exists()
@@ -28,6 +29,7 @@ class FileAccess:
             print(f"Error ensuring file exists: {e}")
 
     def addData(self, receive_data: dict = None):
+        print(receive_data)
         file_path = self.file_address
         try:
             # Attempt to read existing data
@@ -46,7 +48,7 @@ class FileAccess:
                 data.append(receive_data)
 
             with open(file_path, 'w') as file:
-                json.dump(data, file, indent=2)
+                json.dump(data, file, indent=4)
         except Exception as e:
             print(f"Error adding data to file: {e}")
 
