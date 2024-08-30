@@ -1,27 +1,28 @@
 [{
-        "setting": {
-            "title": "SignInXert Dev (v2.1.2)",
-            "background_color": "#FFFFFF",
-            "fontfamily": "",
-            "filepath": "",
-            "geometry": "320x540",
-            "icons": {
-                "root": "./icon",
-                "home": "./home.icon",
-                "back": "./back.icon",
-                "forward": "./forward.icon",
-                "refresh": "./refresh.icon",
-                "menu": "./menu.icon",
-                "app_logo": "/app.icon",
-                "settings": "./setting.icon"
-            }
+    "setting": {
+        "title": "SignInXert Dev (v2.0.3)",
+        "background_color": "#FFFFFF",
+        "fontfamily": "",
+        "geometry": "300x500",
+        "icons": {
+            "root": "./icon",
+            "home": "./home.icon",
+            "back": "./back.icon",
+            "forward": "./forward.icon",
+            "refresh": "./refresh.icon",
+            "menu": "./menu.icon",
+            "app_logo": "/app.icon",
+            "settings": "./setting.icon"
+        },
+        "cache": {
+            "root": "./cache",
+            "logged": "/logged_user.json"
+
         }
     },
-    {
-        "filepath": {
-            "users_data": "database/data.json",
-            "logs": "logs/log.txt",
-            "stater": "SignInXert_Info.txt"
-        }
+    "filepath": {
+        "users_data": "database/data.json",
+        "logs": "logs/log.txt",
+        "stater": "SignInXert_Info.txt"
     }
-]
+}]
