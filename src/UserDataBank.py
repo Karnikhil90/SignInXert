@@ -120,10 +120,10 @@ class UserDataBank:
         except Exception as e:
             print(f"Error reading data: {e}")
     
-    def getData(self, DataType=None) -> list:
+    def getData(self, DataType="all") -> list | dict :
         if DataType == "uid":
             return self.user_uid_stored
-        elif DataType == "pass":
+        elif DataType in ["pass","password"]:
             return self.user_pass_stored
         elif DataType in ["fullname", "name"]:
             return self.user_Fullname_stored
@@ -133,8 +133,18 @@ class UserDataBank:
             return self.user_email_stored
         elif DataType == "login":
             return self.user_uid_stored, self.user_pass_stored
-        else:
-            return self.user_uid_stored, self.user_pass_stored, self.user_Fullname_stored, self.user_age_stored, self.user_email_stored
+        elif DataType == "all":
+            return {
+                "uid": self.user_uid_stored,
+                "password": self.user_pass_stored,
+                "name": self.user_Fullname_stored,
+                "email": self.user_email_stored,
+                "age": self.user_age_stored
+            }
+        else: 
+            print("ErrorType[UserDataBank]: invalid getData() requested ")
+            return None
+             
 
     def add_user(self, add_user_name: str,
                  add_user_pass: str,

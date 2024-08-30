@@ -76,3 +76,12 @@ class FileAccess:
             print(f"File already exists: {self.file_address}")
         except Exception as e:
             print(f"Error creating file: {e}")
+    
+    def WriteData(self,content:str = "[]"):
+        """Clear the content of the JSON file by overwriting it with an empty array."""
+        try:
+            with open(self.file_address, 'w') as file:
+                file.write(content)
+                print(f"Cleared the content of the file: {self.file_address}")
+        except Exception as e:
+            print(f"Error clearing file content: {e}")

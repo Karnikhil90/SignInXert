@@ -14,9 +14,9 @@ Initially, SignInXert was a CLI-based project with several versions aimed at mas
 
 The current version of SignInXert is a fully functional GUI application using Tkinter. It incorporates several features for user authentication and data management, including:
 
-- **Login System:** Allows users to log in using a UID and password.
-- **User Creation:** Enables the creation of new user accounts with details like full name, email, age, and password.
-- **Data Verification:** Provides verification to ensure user data accuracy.
+- **Login System :** Allows users to log in using a UID and password.
+- **User Creation :** Enables the creation of new user accounts with details like full name, email, age, and password.
+- **Data Verification :** Provides verification to ensure user data accuracy.
 
 ## File Structure
 
@@ -56,22 +56,15 @@ The `UserDataBank` class is a crucial component of the application designed to m
 ## Getting Started
 
 1. **Clone the Repository:**
-
-   ```bash
-   git clone <repository-url>
-   ```
-
 2. **Navigate to the Project Directory:**
-
-   ```bash
-   cd SignInXert/src
-   ```
-
 3. **Run the Application:**
 
    ```bash
+   git clone https://github.com/Karnikhil90/SignInXert.git
+   cd SignInXert/src
    python main.py
    ```
+
 
 ## License
 
