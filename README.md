@@ -8,6 +8,19 @@ SignInXert is a basic authentication and login system developed to enhance my un
 
 Initially, SignInXert was a CLI-based project with several versions aimed at mastering Python basics and logging functionalities. Over time, this project has transitioned into a more sophisticated GUI application, demonstrating advanced concepts and improved user experience. You can explore the earlier versions of this project at [SignInXert CLI Versions](https://github.com/Karnikhil90/MyFirst/tree/main/SignInXert015).
 
+# Screen Short
+![Screen Short](util/login_Success.png)
+![Screen Short](util/CreatingAccount.png)
+# <br>
+<br>
+
+[Creating Account](util/CreatingAccount.png)<br>
+[Setting Page](util/SettingPage.png)<br>
+[Using Setting](util/using_setting.png)<br>
+[Logout Conformation](util/asking_logout.png)<br>
+
+[CLICK HERE FOR MORE ](util/)
+
 ## Current Version
 
 The current version of SignInXert is a fully functional GUI application using Tkinter. It incorporates several features for user authentication and data management, including:
