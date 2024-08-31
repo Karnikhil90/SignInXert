@@ -1,5 +1,3 @@
-
-
 # SignInXert
 
 ## Overview
@@ -14,9 +12,29 @@ Initially, SignInXert was a CLI-based project with several versions aimed at mas
 
 The current version of SignInXert is a fully functional GUI application using Tkinter. It incorporates several features for user authentication and data management, including:
 
-- **Login System :** Allows users to log in using a UID and password.
-- **User Creation :** Enables the creation of new user accounts with details like full name, email, age, and password.
-- **Data Verification :** Provides verification to ensure user data accuracy.
+- **File Paths & Structure Adjustments:** 
+  - The project structure has been organized, and file paths have been adjusted.
+  - Brief documentation has been added within the code.
+
+- **JSON Configuration Integration:** 
+  - The application now directly reads its configuration from a JSON file using the `FileAccess` module.
+  - Default values for all important files have been set to ensure smooth operation.
+
+- **HomePage Enhancements:** 
+  - The HomePage UI has been updated to provide a modern look.
+  - A working logout feature has been implemented, along with a cache directory that stores the currently logged-in user's data.
+
+- **Settings Management:** 
+  - The application includes a Settings page where users can change the window geometry and background color.
+  - These settings are saved directly to the `config/*` file.
+
+### Future Implementations
+
+- **Main Application Testing:** 
+  - The project is structured for running the main application from `main.py` in the root directory, but further testing and adjustments are needed.
+
+- **New Library Integration:** 
+  - A `JsonEditor` library has been added to `src/lib` for modifying the `config_app.json` file, though its full implementation and integration are ongoing.
 
 ## File Structure
 
@@ -24,17 +42,23 @@ The project is organized as follows:
 
 ```
 ./ {Root}
+    ├── main.py {Works as a driver code. Calls the SignInXert} 
+    ├── util/ {INFORMATION for README.md}
     ├── src
-        ├── main.py             # The main application entry point
-        ├── UserDataBank.py      # Manages user data storage and retrieval
-        ├── lib/                 # Custom modules
-        ├── icon/                # Icon files
-        ├── cache/               # Stores data for logged-in users
-        ├── logs/                # Application logs
-        ├── info/                # Miscellaneous information
-        ├── database/            # User data files
-        ├── config/              # Configuration files (e.g., JSON for app settings)
-        └── ...                  # Additional directories as the project grows
+    │    ├── SignInXert.py (Main application that runs)
+    │    ├── UserDataBank.py
+    │    ├── __init__.py {!NOT DEFINED.}
+    │    ├── lib/ {Custom modules like JsonEditor, FileAccess, etc.}
+    │    ├── icon/ {All icons are stored here}
+    │    ├── cache/ {Stores data of the logged-in user}
+    │    ├── logs/ 
+    │    ├── info/ 
+    │    ├── example/ {Test projects, not part of the main application}
+    │    ├── database/ 
+    │    ├── config/ {Contains config_app.json to modify app settings like background color and geometry}
+    ├── LICENSE
+    ├── README.md
+    ├── .gitignore
 ```
 
 ## UserDataBank Class
@@ -62,9 +86,8 @@ The `UserDataBank` class is a crucial component of the application designed to m
    ```bash
    git clone https://github.com/Karnikhil90/SignInXert.git
    cd SignInXert/src
-   python main.py
+   python SignInXert.py
    ```
-
 
 ## License
 
