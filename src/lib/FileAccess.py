@@ -51,8 +51,15 @@ class FileAccess:
                 json.dump(data, file, indent=4)
         except Exception as e:
             print(f"Error adding data to file: {e}")
+    def write_json(self,recive_data): 
+        """Write data to JSON file."""
+        try:
+            with open(self.file_address, 'w') as file:
+                json.dump(recive_data, file, indent=4)
+        except Exception as e:
+            print(f"Error writing data to JSON file: {e}")
 
-    def readData(self):
+    def readData(self) -> list:
         file_path = self.file_address
         try:
             with open(file_path, 'r') as file:
@@ -85,3 +92,8 @@ class FileAccess:
                 print(f"Cleared the content of the file: {self.file_address}")
         except Exception as e:
             print(f"Error clearing file content: {e}")
+    def print_json(self,recived_data:any={}):
+        try:
+            print(json.dumps(recived_data, indent=4))
+        except Exception as e:
+            print(f"Error printing JSON: {e}")

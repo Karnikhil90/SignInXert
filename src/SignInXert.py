@@ -104,7 +104,7 @@ class SignInXert(tk.Tk):
         """Load configuration values from the specified file."""
         default_settings = {
             "title": "SignInXert Dev",
-            "geometry": "300x420",
+            "geometry": "360x620",
             "font_family": "Arial",
             "background_color": "#FFFFFF",
             "icons": {"root": "./icon", "app_logo": "/app.icon"},

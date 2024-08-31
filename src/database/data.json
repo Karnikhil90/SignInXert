@@ -1,9 +1,8 @@
-[
-    {
+[{
         "uid": "karnikhil90",
         "password": "nikhil",
         "name": "Nikhil Karmakar",
-        "email": null,
+        "email": "karnikhil90@gmail.com",
         "age": "18"
     },
     {

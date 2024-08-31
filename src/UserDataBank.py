@@ -97,7 +97,7 @@ from tkinter import messagebox
 from lib.FileAccess import FileAccess
 
 class UserDataBank:
-    def __init__(self, filepath="database/data.json"):
+    def __init__(self, filepath:str ="database/data.json"):
         self.File = FileAccess(filepath)
         try:
             self.userData = self.File.readData()

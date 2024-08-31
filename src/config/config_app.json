@@ -1,11 +1,11 @@
 [{
     "setting": {
         "title": "SignInXert Dev (v2.0.3)",
-        "background_color": "#FFFFFF",
+        "background_color": "white",
         "fontfamily": "",
-        "geometry": "300x500",
+        "geometry": "300x420",
         "icons": {
-            "root": "./icon",
+            "root": "src/icon",
             "home": "./home.icon",
             "back": "./back.icon",
             "forward": "./forward.icon",
@@ -15,13 +15,12 @@
             "settings": "./setting.icon"
         },
         "cache": {
-            "root": "./cache",
+            "root": "src/cache",
             "logged": "/logged_user.json"
-
         }
     },
     "filepath": {
-        "users_data": "database/data.json",
+        "users_data": "src/database/data.json",
         "logs": "logs/log.txt",
         "stater": "SignInXert_Info.txt"
     }
