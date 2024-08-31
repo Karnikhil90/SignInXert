@@ -85,8 +85,8 @@ The `UserDataBank` class is a crucial component of the application designed to m
 
    ```bash
    git clone https://github.com/Karnikhil90/SignInXert.git
-   cd SignInXert/src
-   python SignInXert.py
+   cd SignInXert
+   python .\src\SignInXert.py
    ```
 
 ## License
