@@ -4,7 +4,6 @@ on:
   push:
     branches:
       - main
-      - feature/*
   pull_request:
     branches:
       - main
@@ -34,9 +33,3 @@ jobs:
     - name: Lint code
       run: |
         pylint src/
-
-    - name: Build and deploy
-      if: github.event_name == 'push'
-      run: |
-        echo "Building and deploying application..."
-        # Add your build and deploy steps here
