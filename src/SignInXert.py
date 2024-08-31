@@ -79,7 +79,8 @@ conditions:
 """
 # import
 import tkinter as tk
-from tkinter import messagebox,ttk
+from tkinter import *
+from tkinter import messagebox,ttk,PhotoImage
 # My own module or Classes
 from UserDataBank import UserDataBank
 from lib.FileAccess import FileAccess
@@ -107,7 +108,7 @@ class SignInXert(tk.Tk):
             "geometry": "360x620",
             "font_family": "Arial",
             "background_color": "#FFFFFF",
-            "icons": {"root": "./icon", "app_logo": "/app.icon"},
+            "icons": {"root": "./icon", "app_logo": "/appaaa.icon"},
             "cache": {"root": "./cache", "logged": "/logged_user.json"}
         }
         default_filepaths = {
@@ -138,7 +139,22 @@ class SignInXert(tk.Tk):
         # Set application properties
         self.title(self.settings['title'])
         self.geometry(self.settings['geometry'])
-        self.configure(bg=self.settings['background_color'])
+        self.apply_background_color(color=self.settings['background_color'])
+        
+        # Set application icon
+        self.set_application_icon()
+
+    def set_application_icon(self):
+        """Set the application icon."""
+        icon_path = self.settings['icons']['root'] + self.settings['icons']['app_logo']
+        try:
+            # For .ico files
+            self.iconbitmap(icon_path)
+
+            # If you have a PNG file, use this instead:
+            self.iconphoto(False, tk.PhotoImage(file=icon_path))
+        except Exception as e:
+            print(f"Error setting application icon: {e}")
 
     def initialize_frames(self):
         """Initialize and store all the application frames."""
@@ -173,6 +189,25 @@ class SignInXert(tk.Tk):
             frame.refresh_data()
 
         frame.tkraise()
+
+    def apply_background_color(self, color):
+        """Apply the background color to the app and all frames, excluding specific widget types."""
+        self.configure(bg=color)
+
+        # Check if frames are initialized
+        if hasattr(self, 'frames'):
+            for frame_name, frame in self.frames.items():
+                frame.configure(bg=color)  # Set background color for the frame itself
+
+                # Apply the color only to widgets that are frames (containers)
+                for widget in frame.winfo_children():
+                    if isinstance(widget, tk.Frame):  # Only change color for frames
+                        widget.configure(bg=color)
+                    else:
+                        print(f"Skipping widget {widget} - not a frame")
+        else:
+            print("Frames are not initialized.")
+
 
 class LoginPage(tk.Frame):
     def __init__(self, parent, controller, color_scheme=None, user_data_path: str = None):
@@ -360,7 +395,7 @@ class SettingPage(tk.Frame):
         self.controller = controller
         self.editor = self.controller.config_editor
         self.refresh=controller.load_config()
-        self.editor.print_json()
+        # self.editor.print_json()
         # Field Value for updating json config file
         self.GEOMETRY = 'setting.geometry'
         self.BACKGROUND_COLOR = 'setting.background_color'
@@ -416,7 +451,7 @@ class SettingPage(tk.Frame):
     def apply_color(self):
         color = self.color_entry.get() or self.color_var.get()
         if color:
-            self.controller.configure(bg=color)
+            self.controller.apply_background_color(color)
             self.editor._update_field(self.BACKGROUND_COLOR,color)
             self.editor._save_json()
             print(f"Background color changed to {color}")
