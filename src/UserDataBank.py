@@ -120,7 +120,7 @@ class UserDataBank:
         except Exception as e:
             print(f"Error reading data: {e}")
     
-    def getData(self, DataType="all") -> list | dict :
+    def getData(self, DataType="all") :
         if DataType == "uid":
             return self.user_uid_stored
         elif DataType in ["pass","password"]:
