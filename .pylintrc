@@ -1,0 +1,12 @@
+[MASTER]
+# Specify a configuration file.
+# Note: .pylintrc is the default
+rcfile=.pylintrc
+
+[MESSAGES CONTROL]
+# Disable the message, report, category or checker with the given id(s).
+disable=missing-docstring, invalid-name
+
+[REPORTS]
+# Tells whether to display a full report or only the messages.
+reports=yes

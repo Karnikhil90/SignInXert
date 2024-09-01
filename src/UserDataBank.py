@@ -179,13 +179,13 @@ class UserDataBank:
             if uid in self.user_uid_stored:
                 index = self.user_uid_stored.index(uid)
                 if self.user_pass_stored[index] == password:
-                    print("Login successful")
+                    # print("Login successful")
                     return True
                 else:
-                    print("Incorrect password")
+                    # print("Incorrect password")
                     return False
             else:
-                print("UID not found")
+                # print("UID not found")
                 return False
         except Exception as e:
             print(f"Error during login attempt: {e}")
