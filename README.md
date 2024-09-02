@@ -9,15 +9,15 @@ SignInXert is a basic authentication and login system developed to enhance my un
 Initially, SignInXert was a CLI-based project with several versions aimed at mastering Python basics and logging functionalities. Over time, this project has transitioned into a more sophisticated GUI application, demonstrating advanced concepts and improved user experience. You can explore the earlier versions of this project at [SignInXert CLI Versions](https://github.com/Karnikhil90/MyFirst/tree/main/SignInXert015).
 
 # Screen Short
-![Screen Short](util/login_Success.png)
-![Screen Short](util/CreatingAccount.png)
-# <br>
+<p align="center">
+  <img src="util/HomePage.png" width="30%" />
+  <img src="util/SettingPage.png" width="30%" />
+  <img src="util/loginPage.png" width="30%" />
+  <img src="util/CreatingAccount.png" width="30%" />
+  <img src="util/login_Success.png" width="30%" />
+  <img src="util/asking_logout.png" width="30%" />
+</p><br>
 <br>
-
-[Creating Account](util/CreatingAccount.png)<br>
-[Setting Page](util/SettingPage.png)<br>
-[Using Setting](util/using_setting.png)<br>
-[Logout Conformation](util/asking_logout.png)<br>
 
 [CLICK HERE FOR MORE ](util/)
 
@@ -114,6 +114,10 @@ This version is a foundational release, with plans to expand features and enhanc
 
 - [Tkinter Documentation](https://docs.python.org/3/library/tkinter.html)
 - [Python JSON Module](https://docs.python.org/3/library/json.html)
+## Update and Plan
+
+For detailed information on the current status and future plans of the project, please refer to the [UPDATE AND PLAN](info/Project_update_plan.md) document.
+
 
 ## About Me
 

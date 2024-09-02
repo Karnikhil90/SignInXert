@@ -3,3 +3,5 @@ SignInXert021/
 DEBUGER/
 test/
 venv/
+.pytest_cache/
+*.ico

@@ -1,22 +1,7 @@
 [{
-        "uid": "karnikhil90",
-        "password": "nikhil",
-        "name": "Nikhil Karmakar",
-        "email": "karnikhil90@gmail.com",
-        "age": "18"
-    },
-    {
-        "uid": "nikhil90",
-        "password": "nikhil",
-        "name": "Nikhil Karmakar",
-        "email": null,
-        "age": "18"
-    },
-    {
-        "uid": "amit100",
-        "password": "@amit100",
-        "name": "Amit Kumar Yadav",
-        "email": "amit@gmail.com",
-        "age": "18"
-    }
-]
+    "uid": "user01",
+    "password": "pass01",
+    "name": "Test User",
+    "email": "test@example.com",
+    "age": "18"
+}]
