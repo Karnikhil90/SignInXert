@@ -1,14 +1,14 @@
 # import
 import tkinter as tk
 from tkinter import *
-from tkinter import messagebox,ttk,PhotoImage
+from tkinter import messagebox,ttk
 # My own module or Classes
-from UserDataBank import UserDataBank
-from lib.FileAccess import FileAccess
-import lib.JsonEditor as J_Editor
+from .UserDataBank import UserDataBank
+from .lib.FileAccess import FileAccess
+from .lib.JsonEditor import JsonEditor as J_Editor
 
 class SignInXert(tk.Tk):
-    def __init__(self, config_filepath: str = "src/config/config_app.json"):
+    def __init__(self, config_filepath: str = None):
         super().__init__()
         self.config_filepath = config_filepath
         self.settings = {}
@@ -16,7 +16,7 @@ class SignInXert(tk.Tk):
         self.logged_user_path = None
         self.databank = None  # Initialize databank as None
         
-        self.config_editor = J_Editor.JsonEditor(config_filepath)
+        self.config_editor = J_Editor(config_filepath)
         
         self.load_config()
         self.initialize_frames()
@@ -463,8 +463,8 @@ class HomePage(tk.Frame):
             # Navigate back to the login page
             self.controller.show_frame("LoginPage")
 
-def main():
-    app = SignInXert("src/config/config_app.json")
+def main(config:str="src/config/config_app.json"):
+    app = SignInXert()
     app.mainloop()
   
 if __name__ == "__main__":

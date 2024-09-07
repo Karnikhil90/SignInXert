@@ -1,11 +1,11 @@
 
-@author Nikhil Karmakar
-@since alpha 0.0.1
-@version 2.0.10
-@license [MIT](../LICENSE)
+author Nikhil Karmakar<br>
+since alpha 0.0.1 <br>
+version 2.0.12 <br>
+license [MIT](../LICENSE)<br>
+##### Dev version : Recreating from old version(dev0.2.1)
     
-* Dev version : Recreating from old version(dev0.2.1).
-    
+#
 #               SignInXert: Its a basic authentication & login system 
 
 when it will start it will ask use for login with user UID & Password.
@@ -17,6 +17,14 @@ This is Going to use OOPs. for Multiple Pages/Framers like Login, creations , pr
 ## File Structure:
 ```bash
 ./ {Root}
+    ├──LISENCE
+    ├──README.md
+    ├──.gitignore
+    ├──.pylintrc
+    ├──requirement.txt
+    ├──.github/workflow/*
+    ├──info/ {some stuff for UPDATEs and history of creation}
+
     
     ├──main.py {work as a driver code. Calles The SignInXert} 
     ├── util/ {INFORMATION for README.md}
@@ -25,7 +33,11 @@ This is Going to use OOPs. for Multiple Pages/Framers like Login, creations , pr
     │    ├── UserDataBank.py
     │    ├── __init__.py {!NOT DEFINED.}
     │    
-    │    ├── lib/* {import self create module}
+    │    ├── lib/
+    │       ├── __init__.py
+    │       ├── JsonEditor.py
+    │       ├── FileAccess.py
+    │
     │    ├── icon/*{all the icons are stored here}
     │    ├── cache/* {To store the data of the user who is logged in}
     │    ├── logs/
@@ -34,9 +46,7 @@ This is Going to use OOPs. for Multiple Pages/Framers like Login, creations , pr
     │    ├── database/* 
     │    ├── config/*{This will contain a json file with some variables from which u can modify APP.(like background color geometry)}
     │    ├──.........{more dir.. will be there as its grow.}
-    ├──LISENCE
-    ├──README.md
-    ├──.gitignore
+
 ```
 
 ! There will classes UserDataBank, SignInXert and rest are part of the SignInXert.
@@ -61,9 +71,9 @@ This is Going to use OOPs. for Multiple Pages/Framers like Login, creations , pr
 * All will be slowly add in future versions. This version only going to have a very small chuck of it.
 * This is re-creating from the original dev version as a cheak and a self learning of GUI in python.
 
+#
 
-
-#### @update
+### @UPDATE
     UPDATE [28-08-2024 - 15:40]: First update write the documentation as big comment and create the base application. 
     UPDATE [29-08-2024 - 10:30]: Adjusting the file paths & structures.Added lil documentation in the big comments.
         -> Implemented json config Directly from the file using FileAccess module.Set a default value to all the important files
@@ -74,8 +84,11 @@ This is Going to use OOPs. for Multiple Pages/Framers like Login, creations , pr
         -> update the structure little bit. 
         -> Testing run from a main.py file (root/main.py) Of the main application file SignInXert.By adding ./Test ,/example and __init__.py file .
         -> Added a new library file called JsonEditor at src\lib. For changing Json file of config_app.json as I menstion earlier.
+    UPDATE [07-09-2024 -14:00-14:40] : Final update of stucture & add some 
+    __init__.py file. Make fixx all the issues* in the runing of application through main.py file or run as a module.
          
-    
+#   
 #### problem ['*' = fixed]
     [PROBLEM REPORT TIME] : PROBLEM 
     *[30-08-24] The logout need to be better. But the HomePage's logout and re-read the name of the user need to fix
+#

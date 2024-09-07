@@ -20,7 +20,7 @@
         }
     },
     "filepath": {
-        "users_data": "src/database/data.json",
+        "users_data": "src/database/users_data.json",
         "logs": "logs/log.txt",
         "stater": "SignInXert_Info.txt"
     }
