@@ -4,7 +4,7 @@ import json
 class FileAccess:
     def __init__(self, fileAddress):
         self.file_address = fileAddress
-        print(fileAddress)
+        # print(fileAddress)
         try:
             self.ensure_directory_exists()
             self.ensure_file_exists()

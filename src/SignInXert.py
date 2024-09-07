@@ -200,7 +200,7 @@ class LoginPage(tk.Frame):
         """Check if the user credentials are valid using the UserDataBank login method."""
         uid = self.uid_entry.get()
         password = self.pass_entry.get()
-        print(f"DEBUG [LOGIN cheak] : {uid}: {password}")
+        # print(f"DEBUG [LOGIN cheak] : {uid}: {password}")
 
         if self.Databank_instance.logging(uid, password):
             # Fetch user data
@@ -464,7 +464,7 @@ class HomePage(tk.Frame):
             self.controller.show_frame("LoginPage")
 
 def main(config:str="src/config/config_app.json"):
-    app = SignInXert()
+    app = SignInXert(config)
     app.mainloop()
   
 if __name__ == "__main__":

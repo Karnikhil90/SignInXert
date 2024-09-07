@@ -3,7 +3,7 @@ import json
 
 class JsonEditor:
     def __init__(self, file_path):
-        print("DEBUG: JsonEditor Running...")
+        print("DEBUG: JsonEditor Running...",file_path,"....")
         self.file_path = file_path
         self.file_access = FileAccess(file_path)
         self.data = self.file_access.readData()
